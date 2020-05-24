@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DM Score Board</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js" integrity="sha256-Fh801SO9gqegfUdkDxyzXzIUPWzO/Vatqj8uN+5xcL4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <!-- https://docs.google.com/spreadsheets/d/e/2PACX-1vTsw-N1Mycn3C2tvTHE16j96v6B4_Fbb7_o3R9xgxDmdprr6pN_ygeIpf39JphneWh_jj5fPsP_Av6r/pub?gid=1529768825&single=true&output=csv -->
+</head>
+<body>
+  <div class="container pt-5">
+    <h1>Score Board of Discrete Math.</h1>
+    <p>L = on leave</p>
+    <table class="table table-striped table-bordered table-responsive-lg">
+      <thead>
+        <!-- <tr><th>學號</th><th>Quiz1</th><th>Quiz2</th><th>Quiz3</th><th>Exam1</th><th>Quiz4</th><th>Quiz5</th><th>Quiz6</th><th>Quiz7</th><th>Quiz8</th><th>Quiz9</th><th>Quiz10</th><th>Quiz11</th><th>Quiz12</th><th>Quiz13</th><th>Quiz14</th></tr> -->
+      </thead>
+      <tbody id="table-body">
+        
+      </tbody>
+    </table>
+  </div>
+  
+</body>
+<script type="text/javascript">
+Papa.parse("https://gist.githubusercontent.com/bshmueli/c99fc0abf56460e644bd610bf3024e83/raw/720285d133c85d94e0aa3fe3edcc199f6d99e3f7/lab4-data.csv", {
+  download: true,
+  header: true,
+  complete: function(results) {
+    var table_arr = [];
+    results.data.forEach(element => {
+      var tr = '<tr>';
+      for(key in element) {
+        tr += '<td>'+element[key]+'</td>';
+      }
+      tr += '</tr>';
+      $('#table-body').append($(tr));
+    });
+  }
+});
+</script>
+</html>
